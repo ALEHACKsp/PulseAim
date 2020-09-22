@@ -172,9 +172,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DiscordHook\Discord.cpp" />
+    <ClCompile Include="Discord\Discord.cpp" />
+    <ClCompile Include="Discord\Helper.cpp" />
     <ClCompile Include="dllmain.cPP" />
-    <ClCompile Include="Helper\Helper.cpp" />
     <ClCompile Include="ImGui\ImGui.cpp" />
     <ClCompile Include="ImGui\ImGui_draw.cpp" />
     <ClCompile Include="ImGui\ImGui_impl_dx11.cpp" />
@@ -187,7 +187,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="detours.h" />
-    <ClInclude Include="DiscordHook\Discord.h" />
+    <ClInclude Include="Discord\Discord.h" />
     <ClInclude Include="Header\Archivex.h" />
     <ClInclude Include="Header\Config.h" />
     <ClInclude Include="Header\core.h" />

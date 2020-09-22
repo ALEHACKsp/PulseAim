@@ -1,3 +1,10 @@
+/**
+*
+*                      PulseAim
+*			 github.com/ytmcgamer/PulseAim
+*                 made by YTMcGamer#1337
+*
+*/
 #pragma once
 
 #include <filesystem>
@@ -93,7 +100,7 @@ public:
 		bool Extra;
 		bool Keybindss;
 		bool Speedhack;
-	} item;
+	};
 
 	struct {
 		//keybind
@@ -117,4 +124,4 @@ private:
 	std::vector<std::string> configs;
 };
 
-extern c_config config_system;
+extern c_config Settings;

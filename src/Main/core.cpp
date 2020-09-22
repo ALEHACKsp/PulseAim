@@ -1,41 +1,27 @@
-//
-// love fn sucks
-// paulgamer stop pasteing plz
-// hehe cracked
-//
-// YTMcGamer#0131
-//
-#include "../../Header Files/menu/menu.h"
-#include "../../Header Files/Config/config.h"
-#include "../../Header Files/includes.h"
-#include "../../DiscordHook/Discord.h"
+/**
+*
+*                      PulseAim
+*			 github.com/ytmcgamer/PulseAim
+*                 made by YTMcGamer#1337
+*
+*/
+#include "../Header/menu.h"
+#include "../Header/config.h"
+#include "../Incl.h"
+#include "../Discord/Discord.h"
 #include <iostream>
-#include "../../speed.h"
-#include "../../music/BeepMusic.h"
 #include <sstream>
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "../Header/Structs.h"
+#include "../Header/util.h"
+#include "../Header/core.h"
+#include "../speed.h"
+#include "../Header/offsets.h"
 
 using namespace std;
 
-void playNote(const BeepMusic& beepMusic, stringstream& stringStream)
-{
-	unsigned int octave;
-	string syllable;
-	double durationRatio;
-
-	stringStream >> octave >> syllable >> durationRatio;
-	beepMusic.note(octave, syllable, durationRatio);
-}
-
-void playRest(const BeepMusic& beepMusic, stringstream& stringStream)
-{
-	double durationRatio;
-
-	stringStream >> durationRatio;
-	beepMusic.rest(durationRatio);
-}
 namespace Core {
 	bool NoSpread = true;
 	bool IsAirstuck = true;
@@ -104,31 +90,31 @@ namespace Core {
 		Util::ToMatrixWithScale(reinterpret_cast<float*>(reinterpret_cast<PBYTE>(mesh) + 0x1C0), compMatrix);
 
 		float AimPointer;
-		if (config_system.item.AimPoint == 0) {
+		if (Settings.AimPoint == 0) {
 			AimPointer = BONE_HEAD_ID;
 		}
-		else if (config_system.item.AimPoint == 1) {
+		else if (Settings.AimPoint == 1) {
 			AimPointer = BONE_NECK_ID;
 		}
-		else if (config_system.item.AimPoint == 2) {
+		else if (Settings.AimPoint == 2) {
 			AimPointer = BONE_CHEST_ID;
 		}
-		else if (config_system.item.AimPoint == 3) {
+		else if (Settings.AimPoint == 3) {
 			AimPointer = BONE_PELVIS_ID;
 		}
-		else if (config_system.item.AimPoint == 4) {
+		else if (Settings.AimPoint == 4) {
 			AimPointer = BONE_RIGHTELBOW_ID;
 		}
-		else if (config_system.item.AimPoint == 5) {
+		else if (Settings.AimPoint == 5) {
 			AimPointer = BONE_LEFTELBOW_ID;
 		}
-		else if (config_system.item.AimPoint == 6) {
+		else if (Settings.AimPoint == 6) {
 			AimPointer = BONE_RIGHTTHIGH_ID;
 		}
-		else if (config_system.item.AimPoint == 7) {
+		else if (Settings.AimPoint == 7) {
 			AimPointer = BONE_LEFTTHIGH_ID;
 		}
-		else if (config_system.item.AimPoint == 8) {
+		else if (Settings.AimPoint == 8) {
 			AimPointer = BONE_PELVIS_ID;
 		}
 		Util::GetBoneLocation(compMatrix, bones, AimPointer, &out.X);
@@ -139,8 +125,8 @@ namespace Core {
 		if (object && func) {
 			auto objectName = Util::GetObjectFirstName(object);
 			auto funcName = Util::GetObjectFirstName(func);
-			config_system.item.FOV = 80;
-			if (config_system.item.InstantReload)
+			Settings.FOV = 80;
+			if (Settings.InstantReload)
 			{
 				if (Util::SpoofCall(GetAsyncKeyState, 0x52))
 				{
@@ -152,7 +138,7 @@ namespace Core {
 				}
 			}
 
-			else if (config_system.item.vehiclespeed)
+			else if (Settings.vehiclespeed)
 			{
 				if (Util::SpoofCall(GetAsyncKeyState, VK_SHIFT))
 				{
@@ -163,7 +149,7 @@ namespace Core {
 					setAllToSpeed(1.0);
 				}
 			}
-			else if (config_system.item.reboot)
+			else if (Settings.reboot)
 			{
 				if (Util::SpoofCall(GetAsyncKeyState, 0x45))
 				{
@@ -175,7 +161,7 @@ namespace Core {
 				}
 			}
 
-			else if (config_system.item.burstrapid)
+			else if (Settings.burstrapid)
 			{
 				if (Util::SpoofCall(GetAsyncKeyState, 0x01))
 				{
@@ -201,7 +187,7 @@ namespace Core {
 						*reinterpret_cast<FVector*>(root + Offsets::Engine::SceneComponent::RelativeLocation) = CurrentAimPointer;
 						memset(root + Offsets::Engine::SceneComponent::ComponentVelocity, 0, sizeof(FVector));
 					}
-					else if (!config_system.item.SilentAimbot && wcsstr(funcName.c_str(), L"Tick")) {
+					else if (!Settings.SilentAimbot && wcsstr(funcName.c_str(), L"Tick")) {
 						FVector CurrentAimPointer;
 						if (!GetTarget(CurrentAimPointer)) { //head
 							break;
@@ -210,8 +196,8 @@ namespace Core {
 						float angles[2] = { 0 };
 						Util::CalcAngle(&Util::GetViewInfo().Location.X, &CurrentAimPointer.X, angles); //head instead of neck.X
 
-						if (config_system.item.AimbotSlow <= 0.0f) {
-							if (config_system.item.TriggerAimbot) {
+						if (Settings.AimbotSlow <= 0.0f) {
+							if (Settings.TriggerAimbot) {
 								FRotator args = { 0 };
 								args.Pitch = angles[0];
 								args.Yaw = angles[1];
@@ -219,13 +205,13 @@ namespace Core {
 								mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
 								mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 								int x = 0;
-								while (x < config_system.item.TriggerSpeed * 10) {
+								while (x < Settings.TriggerSpeed * 10) {
 									x++;
 								}
 								x = 0;
 							}
 							else {
-								auto scale = config_system.item.AimbotSlow + 1.0f;
+								auto scale = Settings.AimbotSlow + 1.0f;
 								auto currentRotation = Util::GetViewInfo().Rotation;
 
 								FRotator args = { 0 };
@@ -235,8 +221,8 @@ namespace Core {
 							}
 						}
 						else {
-							if (config_system.item.TriggerAimbot) {
-								auto scale = config_system.item.AimbotSlow + 1.0f;
+							if (Settings.TriggerAimbot) {
+								auto scale = Settings.AimbotSlow + 1.0f;
 								auto currentRotation = Util::GetViewInfo().Rotation;
 
 								FRotator args = { 0 };
@@ -246,13 +232,13 @@ namespace Core {
 								mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
 								mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 								int v = 0;
-								while (v < config_system.item.TriggerSpeed * 10) {
+								while (v < Settings.TriggerSpeed * 10) {
 									v++;
 								}
 								v = 0;
 							}
 							else {
-								auto scale = config_system.item.AimbotSlow + 1.0f;
+								auto scale = Settings.AimbotSlow + 1.0f;
 								auto currentRotation = Util::GetViewInfo().Rotation;
 
 								FRotator args = { 0 };
@@ -281,7 +267,7 @@ namespace Core {
 			}
 		}
 
-		if (config_system.item.NoSpreadAimbot && Core::NoSpread && _ReturnAddress() == calculateSpreadCaller) {
+		if (Settings.NoSpreadAimbot && Core::NoSpread && _ReturnAddress() == calculateSpreadCaller) {
 			return 0;
 		}
 
@@ -290,7 +276,7 @@ namespace Core {
 
 	float* CalculateShotHook(PVOID arg0, PVOID arg1, PVOID arg2) {
 		auto ret = CalculateShot(arg0, arg1, arg2);
-		if (ret && config_system.item.SilentAimbot && Core::TargetPawn && Core::LocalPlayerPawn) {
+		if (ret && Settings.SilentAimbot && Core::TargetPawn && Core::LocalPlayerPawn) {
 			Core::NoSpread = TRUE;
 			auto mesh = ReadPointer(Core::TargetPawn, Offsets::Engine::Character::Mesh);
 			if (!mesh) return ret;
@@ -304,31 +290,31 @@ namespace Core {
 
 			FVector CurrentAimPoint = { 0 };
 			int CurrentAimPointer = BONE_HEAD_ID;
-			if (config_system.item.AimPoint == 0) {
+			if (Settings.AimPoint == 0) {
 				CurrentAimPointer = BONE_HEAD_ID;
 			}
-			else if (config_system.item.AimPoint == 1) {
+			else if (Settings.AimPoint == 1) {
 				CurrentAimPointer = BONE_NECK_ID;
 			}
-			else if (config_system.item.AimPoint == 2) {
+			else if (Settings.AimPoint == 2) {
 				CurrentAimPointer = BONE_CHEST_ID;
 			}
-			else if (config_system.item.AimPoint == 3) {
+			else if (Settings.AimPoint == 3) {
 				CurrentAimPointer = BONE_PELVIS_ID;
 			}
-			else if (config_system.item.AimPoint == 4) {
+			else if (Settings.AimPoint == 4) {
 				CurrentAimPointer = BONE_RIGHTELBOW_ID;
 			}
-			else if (config_system.item.AimPoint == 5) {
+			else if (Settings.AimPoint == 5) {
 				CurrentAimPointer = BONE_LEFTELBOW_ID;
 			}
-			else if (config_system.item.AimPoint == 6) {
+			else if (Settings.AimPoint == 6) {
 				CurrentAimPointer = BONE_RIGHTTHIGH_ID;
 			}
-			else if (config_system.item.AimPoint == 7) {
+			else if (Settings.AimPoint == 7) {
 				CurrentAimPointer = BONE_LEFTTHIGH_ID;
 			}
-			else if (config_system.item.AimPoint == 8) {
+			else if (Settings.AimPoint == 8) {
 				CurrentAimPointer = BONE_PELVIS_ID;
 			}
 			Util::GetBoneLocation(compMatrix, bones, CurrentAimPointer, &CurrentAimPoint.X);
@@ -374,7 +360,7 @@ namespace Core {
 	INT GetViewPointHook(PVOID player, FMinimalViewInfo* viewInfo, BYTE stereoPass)
 	{
 		static HWND TargetWindow = 0;
-		float CurrentSpeed = config_system.item.FreeCamSpeed;
+		float CurrentSpeed = Settings.FreeCamSpeed;
 		TargetWindow = FindWindow((L"UnrealWindow"), (L"Fortnite  "));
 
 		auto RotationYaw = viewInfo->Rotation.Yaw * PI / 180.0f;
@@ -393,7 +379,7 @@ namespace Core {
 		auto CurrentViewPoint = GetViewPoint(player, viewInfo, stereoPass);
 
 		auto CurrentFOV = viewInfo->FOV;
-		auto NormalFOV = (((180.0f - HighFOV) / (180.0f - 80.0f)) * (config_system.item.FOV - 80.0f)) + HighFOV;
+		auto NormalFOV = (((180.0f - HighFOV) / (180.0f - 80.0f)) * (Settings.FOV - 80.0f)) + HighFOV;
 
 		if (CurrentFOV > HighFOV) {
 			CurrentFOV = NormalFOV;
@@ -409,12 +395,12 @@ namespace Core {
 			DirectionPoint.Z /= master;
 		}
 
-		if (config_system.item.FOVSlider) {
+		if (Settings.FOVSlider) {
 			viewInfo->FOV = CurrentFOV;
 		}
 
-		if (config_system.item.SpinBot) {
-			if (Util::SpoofCall(GetAsyncKeyState, config_system.keybind.Spinbot) && Util::SpoofCall(GetForegroundWindow) == TargetWindow) {
+		if (Settings.SpinBot) {
+			if (Util::SpoofCall(GetAsyncKeyState, Settings.keybind.Spinbot) && Util::SpoofCall(GetForegroundWindow) == TargetWindow) {
 				// Freeze Cam
 				viewInfo->Location = CurrentLocation;
 				viewInfo->Rotation.Yaw = CurrentYaw;
@@ -435,7 +421,7 @@ namespace Core {
 	}
 
 	VOID ReloadHook(PVOID arg0, PVOID arg1) {
-		if (config_system.item.InstantReload && Core::LocalPlayerPawn) {
+		if (Settings.InstantReload && Core::LocalPlayerPawn) {
 			auto localPlayerWeapon = ReadPointer(Core::LocalPlayerPawn, Offsets::FortniteGame::FortPawn::CurrentWeapon);
 			if (localPlayerWeapon) {
 				auto stats = GetWeaponStats(localPlayerWeapon);

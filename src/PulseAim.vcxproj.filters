@@ -29,10 +29,10 @@
     <ClCompile Include="imgui\imgui_impl_dx11.cpp">
       <Filter>ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="DiscordHook\Discord.cpp">
+    <ClCompile Include="Discord\Discord.cpp">
       <Filter>Discord</Filter>
     </ClCompile>
-    <ClCompile Include="Helper\Helper.cpp">
+    <ClCompile Include="Discord\Helper.cpp">
       <Filter>Discord</Filter>
     </ClCompile>
   </ItemGroup>
@@ -93,9 +93,6 @@
     <ClInclude Include="Header\Config.h" />
     <ClInclude Include="Header\core.h" />
     <ClInclude Include="Header\xor.hpp" />
-    <ClInclude Include="DiscordHook\Discord.h">
-      <Filter>Discord</Filter>
-    </ClInclude>
     <ClInclude Include="Header\Helper.h">
       <Filter>Discord</Filter>
     </ClInclude>
@@ -110,6 +107,9 @@
     </ClInclude>
     <ClInclude Include="Header\offsets.h">
       <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Discord\Discord.h">
+      <Filter>Discord</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

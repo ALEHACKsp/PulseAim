@@ -1,3 +1,10 @@
+/**
+*
+*                      PulseAim
+*			 github.com/ytmcgamer/PulseAim
+*                 made by YTMcGamer#1337
+*
+*/
 #pragma once
 
 #define _CRT_SECURE_NO_WARNINGS
@@ -17,13 +24,13 @@
 #include <d3d11.h>
 #pragma comment(lib, "d3d11.lib")
 
-#include "xor/xor.hpp"
+//#include "xor/xor.hpp"
 #include "Structs.h"
-#include "util/util.h"
-#include "offsets/offsets.h"
-#include "menu/menu.h"
-#include "core/core.h"
-#include "settings/settings.h"
+//#include "util/util.h"
+//#include "offsets/offsets.h"
+//#include "menu/menu.h"
+//#include "core/core.h"
+//#include "settings/settings.h"
 
 ImGuiWindow& BeginScene();
 VOID EndScene(ImGuiWindow& window);

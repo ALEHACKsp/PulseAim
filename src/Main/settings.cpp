@@ -1,15 +1,14 @@
-//
-// love fn sucks
-// paulgamer stop pasteing plz
-// hehe cracked
-//
-// YTMcGamer#0131
-//
+/**
+*
+*                      PulseAim
+*			 github.com/ytmcgamer/PulseAim
+*                 made by YTMcGamer#1337
+*
+*/
+#include "../Incl.h"
+#include "../Header/Config.h"
 
-#include "../../Header Files/includes.h"
-#include "../../Header Files/Config/config.h"
-
-//config_system Settings = { 0 };
+//Settings Settings = { 0 };
 
 namespace SettingsHelper {
 	VOID SaveSettings() {
@@ -19,95 +18,95 @@ namespace SettingsHelper {
 
 		auto file = fopen(path, ("wb"));
 		if (file) {
-			fwrite(&config_system.item, sizeof(config_system.item), 1, file);
+			fwrite(&Settings, sizeof(Settings), 1, file);
 			fclose(file);
 		}
 	}
 
 	VOID ResetSettings() {
-		config_system.item = { 0 };
-		config_system.item.Page = 1;
-		config_system.item.AimPoint = 0;
-		config_system.item.Aimbot = false;//
-		config_system.item.SilentAimbot = false;
-		config_system.item.FlickAimbot = false;
-		config_system.item.SpinBot = false;
-		config_system.item.AutoAim = false;
-		config_system.item.SpamAutoAim = false;
-		config_system.item.TriggerAimbot = false;
-		config_system.item.TriggerSpeed = 0;
-		config_system.item.AutoAimbot = false;
-		config_system.item.NoSpreadAimbot = false;
-		config_system.item.RapidFire = false;
-		config_system.item.BulletTP = false;
-		config_system.item.ARTP = false;
-		config_system.item.BoatRocketTP = false;
-		config_system.item.RocketTP = false;
-		config_system.item.BetterMap = false;
-		config_system.item.ThirdPerson = false;//
-		config_system.item.AirStuck = false;
-		config_system.item.AntiAim = false;
-		config_system.item.FreeCamRotationLock = false;
-		config_system.item.FreeCam = false;
-		config_system.item.FreeCamSpeed = 1.00f;
-		config_system.item.CheckVisible = false;//
-		config_system.item.AimbotFOV = 200.0f;
-		config_system.item.AimbotSlow = 0.0f;
-		config_system.item.InstantReload = false;
-		config_system.item.StreamSnipe = false;
-		config_system.item.FOVSlider = false;//
-		config_system.item.FOV = 100.0f;
-		config_system.item.DrawAimbotFOV = true;
-		config_system.item.DrawFilledAimbotFOV = false;//
-		config_system.item.CrosshairSize = 0.0f;
-		config_system.item.CrosshairThickness = 0.0f;
-		config_system.item.AimbotFOV = true;//  ********************
-		config_system.item.Players = false;//
-		config_system.item.PlayerBox = false;//
-		config_system.item.PlayersCorner = false;
-		config_system.item.PlayerLines = true;//
-		config_system.item.ClosestLineESP = false;//
-		config_system.item.PlayerLinesLocation = 1;
-		config_system.item.PlayerNames = false;//
-		config_system.item.BoxESPOpacity = 0.20f;
-		config_system.item.FOVCircleOpacity = 1.00f;
-		config_system.item.FOVCircleFilledOpacity = 0.20f;
-		config_system.item.PlayerVisibleColor[0] = 0.0f;
-		config_system.item.PlayerVisibleColor[1] = 0.0f;
-		config_system.item.PlayerVisibleColor[2] = 0.0f;
-		config_system.item.PlayerNotVisibleColor[0] = 0.0f;
-		config_system.item.PlayerNotVisibleColor[1] = 0.0f;
-		config_system.item.PlayerNotVisibleColor[2] = 0.0f;
-		config_system.item.PlayerTeammate[0] = 1.0f;
-		config_system.item.PlayerTeammate[1] = 0.00f;
-		config_system.item.PlayerTeammate[2] = 1.0f;
-		config_system.item.FOVCircleColor[0] = 0.0f;
-		config_system.item.FOVCircleColor[1] = 0.20f;
-		config_system.item.FOVCircleColor[2] = 0.0f;
-		config_system.item.BoxESP[0] = 0.0f;
-		config_system.item.BoxESP[1] = 0.0f;
-		config_system.item.BoxESP[2] = 0.0f;
-		config_system.item.LineESP[0] = 0.46f;
-		config_system.item.LineESP[1] = 0.0f;
-		config_system.item.LineESP[2] = 0.0f;
-		config_system.item.Ammo = false;
-		config_system.item.Chest = false;
-		config_system.item.Llama = true;
-		config_system.item.boat = true;
-		config_system.item.chopper = true;
-		config_system.item.Extra = true;
+		Settings = { 0 };
+		Settings.Page = 1;
+		Settings.AimPoint = 0;
+		Settings.Aimbot = false;//
+		Settings.SilentAimbot = false;
+		Settings.FlickAimbot = false;
+		Settings.SpinBot = false;
+		Settings.AutoAim = false;
+		Settings.SpamAutoAim = false;
+		Settings.TriggerAimbot = false;
+		Settings.TriggerSpeed = 0;
+		Settings.AutoAimbot = false;
+		Settings.NoSpreadAimbot = false;
+		Settings.RapidFire = false;
+		Settings.BulletTP = false;
+		Settings.ARTP = false;
+		Settings.BoatRocketTP = false;
+		Settings.RocketTP = false;
+		Settings.BetterMap = false;
+		Settings.ThirdPerson = false;//
+		Settings.AirStuck = false;
+		Settings.AntiAim = false;
+		Settings.FreeCamRotationLock = false;
+		Settings.FreeCam = false;
+		Settings.FreeCamSpeed = 1.00f;
+		Settings.CheckVisible = false;//
+		Settings.AimbotFOV = 200.0f;
+		Settings.AimbotSlow = 0.0f;
+		Settings.InstantReload = false;
+		Settings.StreamSnipe = false;
+		Settings.FOVSlider = false;//
+		Settings.FOV = 100.0f;
+		Settings.DrawAimbotFOV = true;
+		Settings.DrawFilledAimbotFOV = false;//
+		Settings.CrosshairSize = 0.0f;
+		Settings.CrosshairThickness = 0.0f;
+		Settings.AimbotFOV = true;//  ********************
+		Settings.Players = false;//
+		Settings.PlayerBox = false;//
+		Settings.PlayersCorner = false;
+		Settings.PlayerLines = true;//
+		Settings.ClosestLineESP = false;//
+		Settings.PlayerLinesLocation = 1;
+		Settings.PlayerNames = false;//
+		Settings.BoxESPOpacity = 0.20f;
+		Settings.FOVCircleOpacity = 1.00f;
+		Settings.FOVCircleFilledOpacity = 0.20f;
+		Settings.PlayerVisibleColor[0] = 0.0f;
+		Settings.PlayerVisibleColor[1] = 0.0f;
+		Settings.PlayerVisibleColor[2] = 0.0f;
+		Settings.PlayerNotVisibleColor[0] = 0.0f;
+		Settings.PlayerNotVisibleColor[1] = 0.0f;
+		Settings.PlayerNotVisibleColor[2] = 0.0f;
+		Settings.PlayerTeammate[0] = 1.0f;
+		Settings.PlayerTeammate[1] = 0.00f;
+		Settings.PlayerTeammate[2] = 1.0f;
+		Settings.FOVCircleColor[0] = 0.0f;
+		Settings.FOVCircleColor[1] = 0.20f;
+		Settings.FOVCircleColor[2] = 0.0f;
+		Settings.BoxESP[0] = 0.0f;
+		Settings.BoxESP[1] = 0.0f;
+		Settings.BoxESP[2] = 0.0f;
+		Settings.LineESP[0] = 0.46f;
+		Settings.LineESP[1] = 0.0f;
+		Settings.LineESP[2] = 0.0f;
+		Settings.Ammo = false;
+		Settings.Chest = false;
+		Settings.Llama = true;
+		Settings.boat = true;
+		Settings.chopper = true;
+		Settings.Extra = true;
 
 		// keybinds
-		config_system.keybind.Menu = 0x91;
-		config_system.keybind.AimbotLock = 0x02;
-		config_system.keybind.AimbotShoot = 0x01;
-		config_system.keybind.AntiAim = 0x01;
-		config_system.keybind.Spinbot = 0x14;
-		config_system.keybind.Freecam = 0;
-		config_system.keybind.StreamSnipe = 0;
-		config_system.keybind.ThirdPerson = 0;
-		config_system.keybind.Airstuck;
-		config_system.keybind.Airstuck2 = 0;
+		Settings.keybind.Menu = 0x91;
+		Settings.keybind.AimbotLock = 0x02;
+		Settings.keybind.AimbotShoot = 0x01;
+		Settings.keybind.AntiAim = 0x01;
+		Settings.keybind.Spinbot = 0x14;
+		Settings.keybind.Freecam = 0;
+		Settings.keybind.StreamSnipe = 0;
+		Settings.keybind.ThirdPerson = 0;
+		Settings.keybind.Airstuck;
+		Settings.keybind.Airstuck2 = 0;
 
 		SaveSettings();
 	}
@@ -115,16 +114,16 @@ namespace SettingsHelper {
 	VOID Initialize() {
 		CHAR path[0xFF] = { 0 };
 		GetTempPathA(sizeof(path) / sizeof(path[0]), path);
-		strcat(path, ("fnambt.settings"));
+		strcat(path, ("gayfaggot.settings"));
 
 		auto file = fopen(path, ("rb"));
 		if (file) {
 			fseek(file, 0, SEEK_END);
 			auto size = ftell(file);
 
-			if (size == sizeof(config_system.item)) {
+			if (size == sizeof(Settings)) {
 				fseek(file, 0, SEEK_SET);
-				fread(&config_system.item, sizeof(config_system.item), 1, file);
+				fread(&Settings, sizeof(Settings), 1, file);
 				fclose(file);
 			}
 			else {

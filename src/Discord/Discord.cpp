@@ -1,6 +1,6 @@
 #include <cstdint>
 #include <Windows.h>
-#include "../Helper/Helper.h"
+#include "../Header/Helper.h"
 #include "Discord.h"
 
 #define DEVELOPER

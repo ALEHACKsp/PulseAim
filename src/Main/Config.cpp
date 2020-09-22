@@ -3,7 +3,7 @@
 #include "../Header/Archivex.h"
 #include "../Header/config.h"
 
-c_config config_system;
+c_config Settings;
 
 void c_config::run(const char* name) noexcept {
 	PWSTR pathToDocuments;
@@ -35,7 +35,7 @@ void c_config::load(size_t id) noexcept {
 	if (!in.good())
 		return;
 
-	ArchiveX<std::ifstream>{ in } >> item;
+	ArchiveX<std::ifstream>{ in };
 	in.close();
 }
 
@@ -50,7 +50,7 @@ void c_config::save(size_t id) const noexcept {
 	if (!out.good())
 		return;
 
-	ArchiveX<std::ofstream>{ out } << item;
+	ArchiveX<std::ofstream>{ out };
 	out.close();
 }
 
@@ -67,8 +67,4 @@ void c_config::remove(size_t id) noexcept {
 void c_config::rename(size_t item, const char* newName) noexcept {
 	std::filesystem::rename(path / configs[item], path / newName);
 	configs[item] = newName;
-}
-
-void c_config::reset() noexcept {
-	item = { };
 }

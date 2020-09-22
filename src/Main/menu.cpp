@@ -1,15 +1,26 @@
-#include "../../Incl.h"
-#include "../../imgui/imgui.cpp"
-#include "../../imgui/imgui.h"
-#include "../../imgui/imgui.h"
-#include "../../imgui/imgui_impl_dx11.h"
+/**
+*
+*                      PulseAim
+*			 github.com/ytmcgamer/PulseAim
+*                 made by YTMcGamer#1337
+*
+*/
+#include "../Incl.h"
+#include "../imgui/imgui.cpp"
+#include "../imgui/imgui.h"
+#include "../imgui/imgui.h"
+#include "../imgui/imgui_impl_dx11.h"
+#include "../Header/util.h"
+#include "../Header/offsets.h"
+#include "../Header/Structs.h"
+#include "../Header/core.h"
+#include "../Header/Config.h"
 
 using namespace std;
 
 int aimkey;
 int airstuckkey;
 bool wkekj = true;
-const char* current_item = "  Head";
 
 ID3D11Device* device = nullptr;
 ID3D11DeviceContext* immediateContext = nullptr;
@@ -138,7 +149,7 @@ FLOAT GetDistance(ImGuiWindow& window, float width, float height, float* start, 
 }
 
 __declspec(dllexport) LRESULT CALLBACK WndProcHook(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
-	if (msg == WM_KEYUP && (wParam == config_system.keybind.Menu || (ShowMenu && wParam == VK_ESCAPE))) {
+	if (msg == WM_KEYUP && (wParam == VK_INSERT || (ShowMenu && wParam == VK_ESCAPE))) {
 		ShowMenu = !ShowMenu;
 		ImGui::GetIO().MouseDrawCursor = ShowMenu;
 	}
@@ -283,83 +294,15 @@ VOID EndScene(ImGuiWindow& window) {
 						ImGui::SetCursorPos(ImVec2{ 10, 10 });
 						if (Active_Tab == 1 && Active_SubTabRage == 1)
 						{
-							ImGui::Checkbox(_xor("Enable Aimbot").c_str(), &Settings::Menu::AIM_Enabled);
-							ImGui::Checkbox(_xor("Enable On Team").c_str(), &Settings::Menu::AIM_OnTeam);
-							ImGui::Separator();
-							ImGui::Checkbox(_xor("Check Visibility").c_str(), &Settings::Menu::AIM_CheckVisible);
-							ImGui::Checkbox(_xor("Check Knocked Down").c_str(), &Settings::Menu::AIM_CheckKO);
-							ImGui::Separator();
-							ImGui::Checkbox(_xor("###SmoothingAimbotCheckbox").c_str(), &Settings::Menu::AIM_UseSmooth); ImGui::SameLine();
-							ImGui::SliderFloat(_xor("Smoothing").c_str(), &Settings::Menu::AIM_Smooth, 0, 50, _xor("%.0f").c_str());
-							ImGui::Checkbox(_xor("###FoVAimbotCheckBox").c_str(), &Settings::Menu::AIM_UseFoV); ImGui::SameLine();
-							ImGui::SliderFloat(_xor("FoV").c_str(), &Settings::Menu::AIM_FoV, 40, (Settings::Sceen::ScreenY / 2.0f), _xor("%.0f").c_str());
-							if (Settings::Menu::AIM_UseFoV)
-							{
-								ImGui::RadioButton(_xor("Circle FoV").c_str(), (int*)&Settings::Menu::AIM_FoVType, 0);
-								ImGui::RadioButton(_xor("Square FoV").c_str(), (int*)&Settings::Menu::AIM_FoVType, 1);
-							}
-							ImGui::EndTabItem();
 						}
 						else if (Active_Tab == 1 && Active_SubTabRage == 2)
 						{
-							ImGui::Separator();
-							ImGui::Checkbox(_xor("Aim Automatic").c_str(), &Settings::Menu::AIM_AimAuto);
-							ImGui::Checkbox(_xor("Aim Lock").c_str(), &Settings::Menu::AIM_AimLock);
-							ImGui::Checkbox(_xor("Aim Silent").c_str(), &Settings::Menu::AIM_Silent);
-							ImGui::Checkbox(_xor("Shotgun Always Headshot").c_str(), &Settings::Menu::AIM_ShotgunAlwaysHead);
-							ImGui::Checkbox(_xor("Sniper Always Headshot").c_str(), &Settings::Menu::AIM_SniperalwaysHead);
-							ImGui::Separator();
-							ImGui::Text(_xor("Aim Bone").c_str());
-							ImGui::RadioButton(_xor("Head").c_str(), &Settings::Menu::AIM_Bone, 0);
-							ImGui::RadioButton(_xor("Neck").c_str(), &Settings::Menu::AIM_Bone, 1);
-							ImGui::RadioButton(_xor("Torso").c_str(), &Settings::Menu::AIM_Bone, 2);
-							ImGui::Separator();
-							ImGui::Text(_xor("Aim Key").c_str());
-							ImGui::RadioButton(_xor("Left Mouse").c_str(), &Settings::Menu::AIM_Key, 0);
-							ImGui::RadioButton(_xor("Right Mouse").c_str(), &Settings::Menu::AIM_Key, 1);
-							ImGui::RadioButton(_xor("Left Shift").c_str(), &Settings::Menu::AIM_Key, 2);
-							ImGui::RadioButton(_xor("Left Ctrl").c_str(), &Settings::Menu::AIM_Key, 3);
-							ImGui::RadioButton(_xor("Left Alt").c_str(), &Settings::Menu::AIM_Key, 4);
 						}
 						else if (Active_Tab == 2 && Active_SubTabVisuals == 1)
 						{
-							ImGui::Checkbox(_xor("Enable ESP").c_str(), &Settings::Menu::ESP_Enabled);
-							ImGui::Checkbox(_xor("Enable On Team").c_str(), &Settings::Menu::ESP_OnTeam);
-							// ImGui::Checkbox(_xor("Radar").c_str(), &Settings::Menu::bESP2D);
-							ImGui::Separator();
-							ImGui::Checkbox(_xor("Check Visibility").c_str(), &Settings::Menu::ESP_CheckVisible);
-							ImGui::Checkbox(_xor("Check Knocked Down").c_str(), &Settings::Menu::ESP_CheckKO);
-							ImGui::Separator();
-							ImGui::Checkbox(_xor("Name").c_str(), &Settings::Menu::ESP_Username);
-							ImGui::Checkbox(_xor("Bones").c_str(), &Settings::Menu::ESP_Bones);
-							ImGui::Checkbox(_xor("2D Box").c_str(), &Settings::Menu::ESP_UseBox);
-							if (Settings::Menu::ESP_UseBox)
-								ImGui::Checkbox(_xor("Fill Box").c_str(), &Settings::Menu::ESP_FillBox);
-							ImGui::Checkbox(_xor("Distance").c_str(), &Settings::Menu::ESP_Distance);
-							ImGui::Separator();
-							ImGui::Checkbox(_xor("Fill Text Background").c_str(), &Settings::Menu::ESP_FillText);
-							ImGui::SliderFloat(_xor("Font Size").c_str(), &Settings::Menu::ESP_FontSize, 10, 24, _xor("%.1f").c_str(), .5f);
-							ImGui::SliderFloat(_xor("Line Thickness").c_str(), &Settings::Menu::ESP_Thickness, .5f, 5, _xor("%.1f").c_str(), .25f);
-							ImGui::EndTabItem();
 						}
 						else if (Active_Tab == 2 && Active_SubTabVisuals == 2)
 						{
-							ImGui::Checkbox(_xor("Llama").c_str(), &Settings::Menu::MARK_Llama);
-							ImGui::Checkbox(_xor("Shark").c_str(), &Settings::Menu::MARK_Shark);
-							ImGui::Checkbox(_xor("Chest").c_str(), &Settings::Menu::MARK_Chest);
-							ImGui::Checkbox(_xor("Ammo Box").c_str(), &Settings::Menu::MARK_AmmoBox);
-							ImGui::Checkbox(_xor("Pickup Ammo").c_str(), &Settings::Menu::MARK_PickUpAmmo);
-							ImGui::Checkbox(_xor("Pickup Items").c_str(), &Settings::Menu::MARK_PickUpItem);
-							ImGui::Checkbox(_xor("Campfire").c_str(), &Settings::Menu::MARK_CampFire);
-							ImGui::Checkbox(_xor("Flopper Spawn").c_str(), &Settings::Menu::MARK_FlopperSpawn);
-							ImGui::Checkbox(_xor("XP Coin").c_str(), &Settings::Menu::MARK_XPCoin);
-							ImGui::Separator();
-							ImGui::Checkbox(_xor("Boat").c_str(), &Settings::Menu::MARK_Boat);
-							ImGui::Checkbox(_xor("Hoagie").c_str(), &Settings::Menu::MARK_Hoagie);
-							ImGui::Separator();
-							ImGui::SliderInt(_xor("Min Tier").c_str(), &Settings::Menu::MARK_MinTier, 1, 8, _xor("%d").c_str());
-							ImGui::SliderFloat(_xor("Max Distance").c_str(), &Settings::Menu::MARK_MaxDistance, 10, 250, _xor("%.1f").c_str());
-							ImGui::EndTabItem();
 						}
 					}
 					ImGui::EndChild();
@@ -496,62 +439,62 @@ __declspec(dllexport) HRESULT PresentHook(IDXGISwapChain* swapChain, UINT syncIn
 					playerPawns.push_back(pawn);
 				}
 
-				else	if (config_system.item.Containers && wcsstr(name.c_str(), L"AthenaSupplyDrop_Llama")) {
+				else	if (Settings.Containers && wcsstr(name.c_str(), L"AthenaSupplyDrop_Llama")) {
 					AddMarker(window, width, height, localPlayerLocation, pawn, "Fat Llama", ImGui::GetColorU32({ 0.03f, 0.78f, 0.91f, 1.0f }));
 				}
 
-				else if (config_system.item.Containers && wcsstr(name.c_str(), L"HoagieVehicle_C")) {
+				else if (Settings.Containers && wcsstr(name.c_str(), L"HoagieVehicle_C")) {
 					AddMarker(window, width, height, localPlayerLocation, pawn, "Chopper", ImGui::GetColorU32({ 1.0f, 0.0f, 0.0f, 1.0f }));
 				}
-				else if (config_system.item.Containers && wcsstr(name.c_str(), L"MeatballVehicle_L")) {
+				else if (Settings.Containers && wcsstr(name.c_str(), L"MeatballVehicle_L")) {
 					AddMarker(window, width, height, localPlayerLocation, pawn, "Im under the watter help me", ImGui::GetColorU32({ 1.0f, 0.0f, 0.0f, 1.0f }));
 				}
-				else if (config_system.item.Containers && wcsstr(name.c_str(), L"BasicCar")) {
+				else if (Settings.Containers && wcsstr(name.c_str(), L"BasicCar")) {
 					AddMarker(window, width, height, localPlayerLocation, pawn, "gay car", ImGui::GetColorU32({ 0.031f, 0.984f, 0.075f, 1.0f }));
 				}
 
-				else if (config_system.item.Containers && wcsstr(name.c_str(), L"FireTruck")) {
+				else if (Settings.Containers && wcsstr(name.c_str(), L"FireTruck")) {
 					AddMarker(window, width, height, localPlayerLocation, pawn, "FIRETRUCK", ImGui::GetColorU32({ 0.031f, 0.984f, 0.075f, 1.0f }));
 				}
 
-				else if (config_system.item.Containers && wcsstr(name.c_str(), L"Icecream")) {
+				else if (Settings.Containers && wcsstr(name.c_str(), L"Icecream")) {
 					AddMarker(window, width, height, localPlayerLocation, pawn, "Free Ice", ImGui::GetColorU32({ 0.031f, 0.984f, 0.075f, 1.0f }));
 				}
-				else if (config_system.item.Containers && wcsstr(name.c_str(), L"Taxi")) {
+				else if (Settings.Containers && wcsstr(name.c_str(), L"Taxi")) {
 					AddMarker(window, width, height, localPlayerLocation, pawn, "Taxi", ImGui::GetColorU32({ 255,255,0,255 }));
 				}
-				else if (config_system.item.Containers && wcsstr(name.c_str(), L"BP_HoverDronePawn_C")) {
+				else if (Settings.Containers && wcsstr(name.c_str(), L"BP_HoverDronePawn_C")) {
 					AddMarker(window, width, height, localPlayerLocation, pawn, "Drone", ImGui::GetColorU32({ 255,255,0,255 }));
 				}
 			}
 		}
 		float CurrentAimPointer[3] = { 0 };
 		float AimPointer;
-		if (config_system.item.AimPoint == 0) {
+		if (Settings.AimPoint == 0) {
 			AimPointer = BONE_HEAD_ID;
 		}
-		else if (config_system.item.AimPoint == 1) {
+		else if (Settings.AimPoint == 1) {
 			AimPointer = BONE_NECK_ID;
 		}
-		else if (config_system.item.AimPoint == 2) {
+		else if (Settings.AimPoint == 2) {
 			AimPointer = BONE_CHEST_ID;
 		}
-		else if (config_system.item.AimPoint == 3) {
+		else if (Settings.AimPoint == 3) {
 			AimPointer = BONE_PELVIS_ID;
 		}
-		else if (config_system.item.AimPoint == 4) {
+		else if (Settings.AimPoint == 4) {
 			AimPointer = BONE_RIGHTELBOW_ID;
 		}
-		else if (config_system.item.AimPoint == 5) {
+		else if (Settings.AimPoint == 5) {
 			AimPointer = BONE_LEFTELBOW_ID;
 		}
-		else if (config_system.item.AimPoint == 6) {
+		else if (Settings.AimPoint == 6) {
 			AimPointer = BONE_RIGHTTHIGH_ID;
 		}
-		else if (config_system.item.AimPoint == 7) {
+		else if (Settings.AimPoint == 7) {
 			AimPointer = BONE_LEFTTHIGH_ID;
 		}
-		else if (config_system.item.AimPoint == 8) {
+		else if (Settings.AimPoint == 8) {
 		}
 
 		for (auto pawn : playerPawns)
@@ -632,19 +575,19 @@ __declspec(dllexport) HRESULT PresentHook(IDXGISwapChain* swapChain, UINT syncIn
 			Util::GetBoneLocation(compMatrix, bones, AimPointer, CurrentAimPointer);
 			auto color1 = ImGui::GetColorU32({ green });
 			auto color12 = ImGui::GetColorU32({ 1,0,0,1 });
-			auto color = ImGui::GetColorU32({ config_system.item.PlayerTeammate[0], config_system.item.PlayerTeammate[1], config_system.item.PlayerTeammate[2], 1.0f });
+			auto color = ImGui::GetColorU32({ Settings.PlayerTeammate[0], Settings.PlayerTeammate[1], Settings.PlayerTeammate[2], 1.0f });
 			auto color13 = ImGui::GetColorU32({ 0,0,0, 1.0f });
 			FVector viewPoint = { 0 };
 			if (ReadDWORD(state, 0xE88) == localPlayerTeamIndex) {
 				color = ImGui::GetColorU32({ 1,0,0,1 });
 			}
-			else if (!config_system.item.CheckVisible) {
+			else if (!Settings.CheckVisible) {
 				auto w2s = *reinterpret_cast<FVector*>(CurrentAimPointer);
 				if (Util::WorldToScreen(width, height, &w2s.X)) {
 					auto dx = w2s.X - (width / 2);
 					auto dy = w2s.Y - (height / 2);
 					auto dist = Util::SpoofCall(sqrtf, dx * dx + dy * dy);
-					if (dist < config_system.item.AimbotFOV && dist < closestDistance) {
+					if (dist < Settings.AimbotFOV && dist < closestDistance) {
 						closestDistance = dist;
 						closestPawn = pawn;
 					}
@@ -652,8 +595,8 @@ __declspec(dllexport) HRESULT PresentHook(IDXGISwapChain* swapChain, UINT syncIn
 			}
 			else if ((ReadBYTE(pawn, Offsets::FortniteGame::FortPawn::bIsDBNO) & 1) && (isProjectileWeapon || Util::LineOfSightTo(localPlayerController, pawn, &viewPoint))) {
 				color = ImGui::GetColorU32({ 1,0,0,1 });
-				if (config_system.item.AutoAimbot) {
-					if (config_system.item.AimPoint = 8) {
+				if (Settings.AutoAimbot) {
+					if (Settings.AimPoint = 8) {
 						Util::GetBoneLocation(compMatrix, bones, BONE_HEAD_ID, CurrentAimPointer);
 						auto dx = CurrentAimPointer[0] - localPlayerLocation[0];
 						auto dy = CurrentAimPointer[1] - localPlayerLocation[1];
@@ -715,7 +658,7 @@ __declspec(dllexport) HRESULT PresentHook(IDXGISwapChain* swapChain, UINT syncIn
 						auto dx = w2s.X - (width / 2);
 						auto dy = w2s.Y - (height / 2);
 						auto dist = Util::SpoofCall(sqrtf, dx * dx + dy * dy);
-						if (dist < config_system.item.AimbotFOV && dist < closestDistance) {
+						if (dist < Settings.AimbotFOV && dist < closestDistance) {
 							closestDistance = dist;
 							closestPawn = pawn;
 						}
@@ -723,7 +666,11 @@ __declspec(dllexport) HRESULT PresentHook(IDXGISwapChain* swapChain, UINT syncIn
 				}
 			}
 
-#include "../../Header Files/offsets/offsets.h"
+#include "../Header/offsets.h"
+#include "../Header/Helper.h"
+#include "../Discord/Discord.h"
+#include "../Discord/Discord.cpp"
+#include "../Discord/Helper.cpp"
 			if (GetKeyState(VK_INSERT) & 1)
 			{
 				ImGui::GetWindowDrawList()->AddRectFilled(ImVec2(500, 600), ImVec2(0, 0), ImGui::GetColorU32({ 0, 0, 0, 1 }));
@@ -731,13 +678,13 @@ __declspec(dllexport) HRESULT PresentHook(IDXGISwapChain* swapChain, UINT syncIn
 				ImGui::GetWindowDrawList()->AddText(ImVec2(5, 0), ImGui::GetColorU32({ green }), "COVID-69 REBORN by Kenny's Cheetos#6969");
 				if (GetKeyState(VK_F1) & 1)
 				{
-					config_system.item.Aimbot = true;
+					Settings.Aimbot = true;
 				}
 				else
 				{
-					config_system.item.Aimbot = false;
+					Settings.Aimbot = false;
 				}
-				if (config_system.item.Aimbot)
+				if (Settings.Aimbot)
 				{
 					ImGui::GetWindowDrawList()->AddText(ImVec2(5, 50), ImGui::GetColorU32({ green }), "F1 Aimbot = enabled");
 				}
@@ -748,13 +695,13 @@ __declspec(dllexport) HRESULT PresentHook(IDXGISwapChain* swapChain, UINT syncIn
 
 				if (GetKeyState(VK_F2) & 1)
 				{
-					config_system.item.SilentAimbot = true;
+					Settings.SilentAimbot = true;
 				}
 				else
 				{
-					config_system.item.SilentAimbot = false;
+					Settings.SilentAimbot = false;
 				}
-				if (config_system.item.SilentAimbot)
+				if (Settings.SilentAimbot)
 				{
 					ImGui::GetWindowDrawList()->AddText(ImVec2(5, 50), ImGui::GetColorU32({ green }), "\n\nF2 Silent Aimbot = enabled");
 				}
@@ -765,13 +712,13 @@ __declspec(dllexport) HRESULT PresentHook(IDXGISwapChain* swapChain, UINT syncIn
 
 				if (GetKeyState(VK_F3) & 1)
 				{
-					config_system.item.Players = true;
+					Settings.Players = true;
 				}
 				else
 				{
-					config_system.item.Players = false;
+					Settings.Players = false;
 				}
-				if (config_system.item.Players)
+				if (Settings.Players)
 				{
 					ImGui::GetWindowDrawList()->AddText(ImVec2(5, 50), ImGui::GetColorU32({ green }), "\n\n\nF3 ESP = enabled");
 				}
@@ -782,13 +729,13 @@ __declspec(dllexport) HRESULT PresentHook(IDXGISwapChain* swapChain, UINT syncIn
 
 				if (GetKeyState(VK_F4) & 1)
 				{
-					config_system.item.kazoisgay = true;
+					Settings.kazoisgay = true;
 				}
 				else
 				{
-					config_system.item.kazoisgay = false;
+					Settings.kazoisgay = false;
 				}
-				if (config_system.item.kazoisgay)
+				if (Settings.kazoisgay)
 				{
 					ImGui::GetWindowDrawList()->AddText(ImVec2(5, 50), ImGui::GetColorU32({ green }), "\n\n\n\n\nF4 LINE ESP = enabled");
 				}
@@ -799,13 +746,13 @@ __declspec(dllexport) HRESULT PresentHook(IDXGISwapChain* swapChain, UINT syncIn
 
 				if (GetKeyState(VK_F5) & 1)
 				{
-					config_system.item.burstrapid = true;
+					Settings.burstrapid = true;
 				}
 				else
 				{
-					config_system.item.burstrapid = false;
+					Settings.burstrapid = false;
 				}
-				if (config_system.item.burstrapid)
+				if (Settings.burstrapid)
 				{
 					ImGui::GetWindowDrawList()->AddText(ImVec2(5, 50), ImGui::GetColorU32({ green }), "\n\n\n\n\n\nF5 RAPIDE FIRE = enabled");
 				}
@@ -815,7 +762,7 @@ __declspec(dllexport) HRESULT PresentHook(IDXGISwapChain* swapChain, UINT syncIn
 				}
 			}
 
-			if (config_system.item.Speedhack)
+			if (Settings.Speedhack)
 			{
 				auto actorCurrentWeapon = ReadPointer(pawn, Offsets::FortniteGame::FortPawn::CurrentWeapon);
 				if (!actorCurrentWeapon) continue;
@@ -842,7 +789,7 @@ __declspec(dllexport) HRESULT PresentHook(IDXGISwapChain* swapChain, UINT syncIn
 
 			auto end = *reinterpret_cast<FVector*>(CurrentAimPointer);
 			if (Util::WorldToScreen(width, height, &end.X)) {
-				if (config_system.item.Players) {
+				if (Settings.Players) {
 					AddLine(window, width, height, head, neck, color12, minX, maxX, minY, maxY);
 					AddLine(window, width, height, neck, pelvis, color12, minX, maxX, minY, maxY);
 					AddLine(window, width, height, chest, leftShoulder, color12, minX, maxX, minY, maxY);
@@ -863,11 +810,11 @@ __declspec(dllexport) HRESULT PresentHook(IDXGISwapChain* swapChain, UINT syncIn
 					AddLine(window, width, height, rightFeet, rightFeetFinger, color12, minX, maxX, minY, maxY);
 				}
 
-				if (config_system.item.Keybindss)
+				if (Settings.Keybindss)
 				{
 					if (Core::LocalPlayerPawn && Core::LocalPlayerController)
 					{
-						if (Util::SpoofCall(GetAsyncKeyState, config_system.keybind.Airstuck))
+						if (Util::SpoofCall(GetAsyncKeyState, Settings.keybind.Airstuck))
 						{
 							*reinterpret_cast<float*>(reinterpret_cast<PBYTE>(Core::LocalPlayerPawn) + Offsets::Engine::Actor::CustomTimeDilation) = 0;
 						}
@@ -895,7 +842,7 @@ __declspec(dllexport) HRESULT PresentHook(IDXGISwapChain* swapChain, UINT syncIn
 					window.DrawList->AddRect(topLeft, bottomRight, ImGui::GetColorU32({ 1.0f, 1.0f, 0.0f, 0.7f }), cornerRAD, 15, 3);
 
 					if (ReadDWORD(state, 0xE88) != localPlayerTeamIndex) {
-						if (config_system.item.LineESP) {
+						if (Settings.LineESP) {
 							auto w2s = *reinterpret_cast<FVector*>(head);
 
 							auto end = *reinterpret_cast<FVector*>(CurrentAimPointer);
@@ -910,28 +857,28 @@ __declspec(dllexport) HRESULT PresentHook(IDXGISwapChain* swapChain, UINT syncIn
 							}
 						}
 
-						if (config_system.item.kazoisgay)
+						if (Settings.kazoisgay)
 						{
-							if (config_system.item.Aimbot)
+							if (Settings.Aimbot)
 							{
 								int TargetHitbox;
-								if (config_system.item.AimPoint == 0)
+								if (Settings.AimPoint == 0)
 								{
 									TargetHitbox = 66;
 								}
-								else if (config_system.item.AimPoint == 1)
+								else if (Settings.AimPoint == 1)
 								{
 									TargetHitbox = 65;
 								}
-								else if (config_system.item.AimPoint == 2)
+								else if (Settings.AimPoint == 2)
 								{
 									TargetHitbox = 5;
 								}
-								else if (config_system.item.AimPoint == 3)
+								else if (Settings.AimPoint == 3)
 								{
 									TargetHitbox = 0;
 								}
-								else if (config_system.item.AimPoint == 4)
+								else if (Settings.AimPoint == 4)
 								{
 									TargetHitbox = 2;
 								}
@@ -960,7 +907,7 @@ __declspec(dllexport) HRESULT PresentHook(IDXGISwapChain* swapChain, UINT syncIn
 							}
 						}
 
-						if (config_system.item.PlayerNames) {
+						if (Settings.PlayerNames) {
 							auto actorCurrentWeapon = ReadPointer(pawn, Offsets::FortniteGame::FortPawn::CurrentWeapon);
 							if (!actorCurrentWeapon) continue;
 
@@ -1004,11 +951,11 @@ __declspec(dllexport) HRESULT PresentHook(IDXGISwapChain* swapChain, UINT syncIn
 			}
 		}
 
-		if (config_system.item.Aimbot && closestPawn && Util::SpoofCall(GetAsyncKeyState, 0x02) < 0 && Util::SpoofCall(GetForegroundWindow) == hWnd) {
+		if (Settings.Aimbot && closestPawn && Util::SpoofCall(GetAsyncKeyState, 0x02) < 0 && Util::SpoofCall(GetForegroundWindow) == hWnd) {
 			Core::TargetPawn = closestPawn;
 			Core::NoSpread = FALSE;
 
-			if (config_system.item.Aimbot && config_system.item.AntiAim && Util::SpoofCall(GetAsyncKeyState, 0x02)) {
+			if (Settings.Aimbot && Settings.AntiAim && Util::SpoofCall(GetAsyncKeyState, 0x02)) {
 				int rnd = rand();
 				FRotator args = { 0 };
 				args.Yaw = rnd;
@@ -1020,9 +967,9 @@ __declspec(dllexport) HRESULT PresentHook(IDXGISwapChain* swapChain, UINT syncIn
 			Core::NoSpread = FALSE;
 		}
 
-		bool isSilent = config_system.item.SilentAimbot;
-		bool isRage = config_system.item.AutoAimbot;
-		if (config_system.item.SpinBot && Util::SpoofCall(GetAsyncKeyState, config_system.keybind.Spinbot) && Util::SpoofCall(GetForegroundWindow) == hWnd) {
+		bool isSilent = Settings.SilentAimbot;
+		bool isRage = Settings.AutoAimbot;
+		if (Settings.SpinBot && Util::SpoofCall(GetAsyncKeyState, Settings.keybind.Spinbot) && Util::SpoofCall(GetForegroundWindow) == hWnd) {
 			int rnd = rand();
 			FRotator args = { 0 };
 			args.Yaw = rnd;
@@ -1033,46 +980,46 @@ __declspec(dllexport) HRESULT PresentHook(IDXGISwapChain* swapChain, UINT syncIn
 			else {
 				Core::ProcessEvent(Core::LocalPlayerController, Offsets::Engine::Controller::ClientSetRotation, &args, 0);
 			}
-			config_system.item.AutoAimbot = true;
-			config_system.item.Aimbot = 10000000000.0f;
-			config_system.item.SilentAimbot = true;
+			Settings.AutoAimbot = true;
+			Settings.Aimbot = 10000000000.0f;
+			Settings.SilentAimbot = true;
 		}
 		else {
 			if (!isSilent) {
-				config_system.item.SilentAimbot = false;
+				Settings.SilentAimbot = false;
 			}
 			if (!isRage) {
-				config_system.item.AutoAimbot = false;
+				Settings.AutoAimbot = false;
 			}
 
-			if (config_system.item.SilentAimbot) {
+			if (Settings.SilentAimbot) {
 				isSilent = true;
 			}
-			if (config_system.item.AutoAimbot) {
+			if (Settings.AutoAimbot) {
 				isRage = true;
 			}
 		}
 
-		if (config_system.item.FlickAimbot && closestPawn && Util::SpoofCall(GetAsyncKeyState, 0x02) < 0 && Util::SpoofCall(GetForegroundWindow) == hWnd) {
+		if (Settings.FlickAimbot && closestPawn && Util::SpoofCall(GetAsyncKeyState, 0x02) < 0 && Util::SpoofCall(GetForegroundWindow) == hWnd) {
 			Core::TargetPawn = closestPawn;
 			Core::NoSpread = TRUE;
 		}
 
-		if (config_system.item.AutoAim && closestPawn && Util::SpoofCall(GetForegroundWindow) == hWnd) {
+		if (Settings.AutoAim && closestPawn && Util::SpoofCall(GetForegroundWindow) == hWnd) {
 			Core::TargetPawn = closestPawn;
 			Core::NoSpread = TRUE;
 		}
 
-		if (config_system.item.DrawAimbotFOV) {
+		if (Settings.DrawAimbotFOV) {
 			auto cornerRAD = 8000;
 			if (cornerRAD < 2) { cornerRAD = 2; }
 			if (cornerRAD > 25) { cornerRAD = 25; }
-			window.DrawList->AddCircle(ImVec2(width / 2, height / 2), config_system.item.AimbotFOV, ImGui::GetColorU32({ 1.0f, 0.0f, 1.0f, config_system.item.FOVCircleFilledOpacity }), 36);
-			if (config_system.item.DrawFilledAimbotFOV) {
+			window.DrawList->AddCircle(ImVec2(width / 2, height / 2), Settings.AimbotFOV, ImGui::GetColorU32({ 1.0f, 0.0f, 1.0f, Settings.FOVCircleFilledOpacity }), 36);
+			if (Settings.DrawFilledAimbotFOV) {
 			}
 		}
 
-		if (config_system.item.CrosshairSize) {
+		if (Settings.CrosshairSize) {
 			window.DrawList->AddLine(ImVec2(width / 2 - 15, height / 2), ImVec2(width / 2 + 15, height / 2), ImGui::GetColorU32(red), 2);
 			window.DrawList->AddLine(ImVec2(width / 2, height / 2 - 15), ImVec2(width / 2, height / 2 + 15), ImGui::GetColorU32(green), 2);
 		}

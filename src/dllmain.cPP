@@ -1,15 +1,16 @@
-//
-// love fn sucks
-// paulgamer stop pasteing plz
-// hehe cracked
-//
-// YTMcGamer#0131
-//
+/**
+*
+*                      PulseAim
+*			 github.com/ytmcgamer/PulseAim
+*                 made by YTMcGamer#1337
+*
+*/
 
-#include "Header Files/includes.h"
-#include "Header Files/menu/menu.h"
-#include "Header Files/config/Config.h"
-
+#include "Header/util.h"
+#include "Header/settings.h"
+#include "Header/offsets.h"
+#include "Header/core.h"
+#include "Header/menu.h"
 VOID Main() {
 	// system("https://discord.gg/yyKQCjs");
 	 //system("https://www.youtube.com/channel/UCGJuiskeVMeV-9yzMzxQgZw");

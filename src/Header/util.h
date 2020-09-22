@@ -1,10 +1,10 @@
-//
-// love fn sucks
-// paulgamer stop pasteing plz
-// hehe cracked
-//
-// YTMcGamer#0131
-//
+/**
+*
+*                      PulseAim
+*			 github.com/ytmcgamer/PulseAim
+*                 made by YTMcGamer#1337
+*
+*/
 #pragma once
 #include "../Incl.h"
 #define PI (3.141592653589793f)

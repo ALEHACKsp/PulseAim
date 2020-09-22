@@ -1,13 +1,13 @@
-//
-// love fn sucks
-// paulgamer stop pasteing plz
-// hehe cracked
-//
-// YTMcGamer#0131
-//
+/**
+*
+*                      PulseAim
+*			 github.com/ytmcgamer/PulseAim
+*                 made by YTMcGamer#1337
+*
+*/
 #include <cstdlib>
 #include <Windows.h>
-#include "Helper.h"
+#include "../Header/Helper.h"
 
 void Helper::OpenConsole()
 {
