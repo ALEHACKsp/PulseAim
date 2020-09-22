@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="dllmain.cPP" />
+    <ClCompile Include="Main\core.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\menu.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\Util.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\settings.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\offsets.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Main\Config.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_draw.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_impl_dx11.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="DiscordHook\Discord.cpp">
+      <Filter>Discord</Filter>
+    </ClCompile>
+    <ClCompile Include="Helper\Helper.cpp">
+      <Filter>Discord</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="lazyyy.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="detours.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\includes.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="speed.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="spoof_call.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="spoofshit.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\stb_rect_pack.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\stb_textedit.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\stb_truetype.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="structs.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Structs.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Vektors.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_internal.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_impl_dx11.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_xorstr.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Incl.h" />
+    <ClInclude Include="Header\Archivex.h" />
+    <ClInclude Include="Header\Config.h" />
+    <ClInclude Include="Header\core.h" />
+    <ClInclude Include="Header\xor.hpp" />
+    <ClInclude Include="DiscordHook\Discord.h">
+      <Filter>Discord</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\Helper.h">
+      <Filter>Discord</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\util.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\settings.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\menu.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Header\offsets.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="detours.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="spoofinternal.asm" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Discord">
+      <UniqueIdentifier>{1f5febc4-1223-485b-a000-c613ebce1926}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImGui">
+      <UniqueIdentifier>{d80750bc-ee22-4f3a-989b-0c6ed40e206b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Nuklear">
+      <UniqueIdentifier>{ac17c5d3-051f-4478-98f7-f4f678ac4d26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{d59b7dde-4919-4417-948b-687986be035b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header">
+      <UniqueIdentifier>{d7ce1586-8459-404c-a4a4-c620d9359e23}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
